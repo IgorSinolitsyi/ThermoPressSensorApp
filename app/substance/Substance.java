@@ -1,0 +1,31 @@
+package app.substance;
+
+import app.sensors.Sensor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Substance {
+
+    private List<Sensor> sensors = new ArrayList<>();
+    private int state;
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+        notifyAllObservers();
+    }
+
+    public void attach(Sensor sensor) {
+        sensors.add(sensor);
+    }
+
+    public void notifyAllObservers() {
+        for (Sensor sensor : sensors) {
+            sensor.update();
+        }
+    }
+}
